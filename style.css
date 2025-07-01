@@ -1,57 +1,47 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --zen-primary: #6366f1;
+  --zen-secondary: #8b5cf6;
+  --zen-accent: #06b6d4;
+  --zen-success: #10b981;
+  --zen-warning: #f59e0b;
+  --zen-gold: #eab308;
+}
+
+* {
   font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
 }
-.header {
-  background-color: #2563EB;
-  color: white;
-  padding: 2rem;
-  text-align: center;
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--zen-primary) 0%, var(--zen-secondary) 100%);
 }
-.intro {
-  padding: 2rem;
-  text-align: center;
+
+.pro-badge {
+  background: linear-gradient(135deg, var(--zen-gold) 0%, #f97316 100%);
 }
-.chatbot {
-  padding: 1rem 2rem;
+
+.glass-effect {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.hidden {
-  display: none;
+
+.floating-card {
+  transform: translateY(0);
+  transition: all 0.3s ease;
 }
-#aiChatModal {
-  background: white;
-  padding: 1rem;
-  margin-top: 1rem;
-  border: 1px solid #ddd;
+
+.floating-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
-#chatMessages {
-  min-height: 100px;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: #f0f0f0;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
+
+.ai-chat-bubble {
+  animation: pulse 2s infinite;
 }
-input, button {
-  margin: 0.3rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-}
-button {
-  background-color: #2563EB;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #1e4db7;
-}
-.footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #eee;
-  margin-top: 2rem;
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
