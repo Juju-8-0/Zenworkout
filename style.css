@@ -1,0 +1,48 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --zen-primary: #6366f1;
+    --zen-secondary: #8b5cf6;
+    --zen-accent: #06b6d4;
+    --zen-success: #10b981;
+    --zen-warning: #f59e0b;
+    --zen-gold: #eab308;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--zen-primary) 0%, var(--zen-secondary) 100%);
+}
+
+.pro-badge {
+    background: linear-gradient(135deg, var(--zen-gold) 0%, #f97316 100%);
+}
+
+.glass-effect {
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.floating-card {
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.floating-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.ai-chat-bubble {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
