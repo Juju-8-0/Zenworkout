@@ -1,55 +1,32 @@
-const aiChatBtn = document.getElementById('aiChatBtn');
-const aiChatModal = document.getElementById('aiChatModal');
-const closeChatBtn = document.getElementById('closeChatBtn');
-const chatInput = document.getElementById('chatInput');
-const sendChatBtn = document.getElementById('sendChatBtn');
-const chatMessages = document.getElementById('chatMessages');
-const quickQuestions = document.querySelectorAll('.quick-question');
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById('darkModeToggle');
+if (darkModeToggle) {
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const icon = darkModeToggle.querySelector('i');
+    icon.classList.toggle('fa-moon');
+    icon.classList.toggle('fa-sun');
+  });
+}
 
-const aiResponses = {
-  "post-workout": "Try a protein smoothie with Greek yogurt, banana, and spinach.",
-  "muscle": "Focus on progressive overload and eat enough protein.",
-  "recovery": "Get 8+ hours of sleep, stretch, and hydrate.",
-  "default": "I’m here to help! Ask me anything about your fitness journey."
+// Floating Card Entrance Animation
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
 };
 
-function getAIResponse(msg) {
-  const text = msg.toLowerCase();
-  if (text.includes("eat") || text.includes("meal")) return aiResponses["post-workout"];
-  if (text.includes("muscle") || text.includes("build")) return aiResponses["muscle"];
-  if (text.includes("rest") || text.includes("recovery")) return aiResponses["recovery"];
-  return aiResponses["default"];
-}
-
-function addMessage(text, isUser = false) {
-  const msg = document.createElement('div');
-  msg.textContent = text;
-  msg.style.margin = "0.5rem 0";
-  msg.style.textAlign = isUser ? "right" : "left";
-  chatMessages.appendChild(msg);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function sendMessage() {
-  const msg = chatInput.value.trim();
-  if (!msg) return;
-  addMessage(msg, true);
-  chatInput.value = "";
-  setTimeout(() => {
-    addMessage(getAIResponse(msg));
-  }, 1000);
-}
-
-aiChatBtn.addEventListener('click', () => aiChatModal.classList.remove('hidden'));
-closeChatBtn.addEventListener('click', () => aiChatModal.classList.add('hidden'));
-sendChatBtn.addEventListener('click', sendMessage);
-chatInput.addEventListener('keypress', e => {
-  if (e.key === "Enter") sendMessage();
-});
-quickQuestions.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const question = btn.textContent;
-    addMessage(question, true);
-    setTimeout(() => addMessage(getAIResponse(question)), 1000);
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.transform = 'translateY(0)';
+      entry.target.style.opacity = '1';
+    }
   });
+}, observerOptions);
+
+document.querySelectorAll('.floating-card').forEach(card => {
+  card.style.transform = 'translateY(20px)';
+  card.style.opacity = '0';
+  card.style.transition = 'all 0.6s ease';
+  observer.observe(card);
 });
